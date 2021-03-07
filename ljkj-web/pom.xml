@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cn.ljkj</groupId>
+    <artifactId>ljkj-main</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>ljkj-web</artifactId>
+  <packaging>war</packaging>
+  <description>这是表现层模块</description>
+  
+  
+  <dependencies>
+  
+  	<dependency>
+  		<groupId>cn.ljkj</groupId>
+  		<artifactId>ljkj-service</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  
+  
+ 	 <!-- struts2 -->
+ 	 <dependency>
+		<groupId>org.apache.struts</groupId>
+		<artifactId>struts2-core</artifactId>
+	</dependency>
+  
+  	<!-- struts2-spring-plugin -->
+  	<dependency>
+		<groupId>org.apache.struts</groupId>
+		<artifactId>struts2-spring-plugin</artifactId>
+	</dependency>
+ 	 <!-- spring-web -->
+  
+  	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-web</artifactId>
+	</dependency>
+  
+  
+  
+  </dependencies>
+  
+  
+  
+</project>

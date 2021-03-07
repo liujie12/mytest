@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+                    http://www.springframework.org/schema/context
+                    http://www.springframework.org/schema/context/spring-context.xsd
+                    http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans.xsd
+                    http://www.springframework.org/schema/tx
+                    http://www.springframework.org/schema/tx/spring-tx.xsd
+                    http://www.springframework.org/schema/aop
+                    http://www.springframework.org/schema/aop/spring-aop.xsd">
+ 
+ <!-- 解析db.properties -->    
+ <context:property-placeholder location="classpath:db.properties"/>            
+ 
+ <!-- 创建c3po连接池 -->   
+  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+  		<property name="jdbcUrl" value="${jdbcUrl}"/>
+  		<property name="driverClass" value="${driverClass}"/>
+  		<property name="user" value="${user}"/>
+  		<property name="password" value="${password}"/>
+  </bean>    
+  
+  <!-- 创建sessionFactory -->
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+  	<property name="dataSource"/>
+  	<property name="hibernateProperties">
+  		<props>
+  			<!-- 显示sql语句 -->
+  			<prop key="hibernate.show_sql">true</prop>
+  			
+  			<!-- 是否自动建表 -->
+  			<prop key="hibernate.hbm2dll.auto">update</prop>
+  		</props>
+  	</property>
+  	<!-- 扫描实体路径 -->
+  	<property name="packagesToScan">
+  		<list>
+  			<value>cn.ljkj.crm.domain</value>
+  		</list>
+  	
+  	</property>
+  </bean>    
+  
+  
+  <!-- 开启spring事务（注解） -->      
+   <!-- 创建hibernate事务管理器 -->  
+  <bean id= "transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+  	<property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  
+  <!-- 开启spring事务配置 -->
+  <tx:annotation-driven transaction-manager="transactionManager"/>     
+  
+  
+  <!-- 开始springIoC扫描 -->
+  <context:component-scan base-package="cn.ljkj.crm"/>
+          
+</beans>
